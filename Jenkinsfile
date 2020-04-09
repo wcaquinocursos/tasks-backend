@@ -52,6 +52,14 @@ pipeline{
                 
             }
         }
+        stage('Functional Tests'){
+            steps{
+                dir('functional-test'){
+                    git credentialsId: '23956211-31cd-44a1-80c5-5d627a0f1d03', url: 'https://github.com/HenriqueGalli/functional-test'
+                    bat 'mvn test'
+                }
+            }
+        }
     }
 }
 
