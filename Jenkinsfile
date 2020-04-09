@@ -39,6 +39,15 @@ pipeline{
                 dir('api-test'){
                     git credentialsId: '23956211-31cd-44a1-80c5-5d627a0f1d03', url: 'https://github.com/HenriqueGalli/tasks-api-test'
                     bat 'mvn test'
+                }                
+            }
+        }
+        stage('Deploy Frontend'){
+            steps{
+                dir('frontend'){
+                    git credentialsId: '23956211-31cd-44a1-80c5-5d627a0f1d03', url: 'https://github.com/HenriqueGalli/tasks-frontend'
+                    bat 'mvn clean package'
+                    deploy adapters: [tomcat8(credentialsId: 'TomcatAdmin', path: '', url: 'http://localhost:8001')], contextPath: 'tasks', war: 'target/tasks.war'                   
                 }
                 
             }
