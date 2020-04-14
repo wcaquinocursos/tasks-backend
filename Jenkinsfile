@@ -79,6 +79,12 @@ pipeline{
         always{
             junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml,api-test/target/surefire-reports/*.xml,functional-test/target/surefire-reports/*.xml,functional-test/target/failsafe-reports/*.xml'
         }
+        unsuccessful{
+            emailext attachLog: true, body: '', subject: 'Build $BUILD_NUMBER has failed', to: 'henrique.galli@atomicsolutions.com.br'
+        }
+        fixed{
+            emailext attachLog: true, body: '', subject: 'Build is fixed', to: 'henrique.galli@atomicsolutions.com.br'
+        }
     }
 }
 
