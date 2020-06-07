@@ -6,7 +6,13 @@ pipeline {
                 bat 'mvn clean package'
             }
         }
-        stage ('Approval to Deploy'){
+        stage ('Disponibilizar Arquivos'){
+            dir('C:\\Users\\jsousa\\dev\\devops\\tasks-backend\\target') {
+                // some block
+            }
+        }
+    }
+//        stage ('Approval to Deploy'){
             steps {
                 input ('Deseja prosseguir?')
             }
