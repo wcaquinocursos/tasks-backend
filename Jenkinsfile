@@ -11,8 +11,7 @@ pipeline {
                 // some block
             }
         }
-    }
-//        stage ('Approval to Deploy'){
+/**        stage ('Approval to Deploy'){
             steps {
                 input ('Deseja prosseguir?')
             }
@@ -31,5 +30,5 @@ pipeline {
                 }
             }
         }
-    }
+**/ }
 }
