@@ -7,8 +7,9 @@ pipeline {
             }
         }
         stage ('Disponibilizar Arquivos'){
-            dir('C:\\Users\\jsousa\\dev\\devops\\tasks-backend\\target') {
-                // some block
+            steps{
+                dir('C:\\Users\\jsousa\\dev\\devops\\tasks-backend\\target')
+                    // some block
             }
         }
 /**        stage ('Approval to Deploy'){
