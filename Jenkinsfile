@@ -5,6 +5,10 @@ pipeline {
             steps {
                 bat 'mvn clean package'
             }
+        stage ('Aprovação para Deploy')
+            steps {
+                input ('Deseja prosseguir?')
+            }
         }
         stage ('Deploy Backend'){
             steps {
