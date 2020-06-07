@@ -6,7 +6,7 @@ pipeline {
                 bat 'mvn clean package'
             }
         }
-        stage ('Aprovação para Deploy')
+        stage ('Aprovação para Deploy'){
             steps {
                 input ('Deseja prosseguir?')
             }
