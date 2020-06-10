@@ -26,4 +26,9 @@ pipeline {
             }
         }
     }
+    post {
+        always {
+            archiveArtifacts artifacts: 'target/tasks-backend.war, frontend/task', onlyIfSuccessful: true
+        }
+    }
 }
