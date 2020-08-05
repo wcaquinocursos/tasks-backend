@@ -29,5 +29,16 @@ pipeline {
         }
       }
     }
+    stage('Deploy') {
+      steps {
+        deploy adapters: [tomcat8(credentialsId: 'TomcatLogin', path: '', url: 'http://localhost:8001/')], contextPath: 'tasks-backend', war: 'target/tasks-backend.war'
+      }
+    }
+    stage('API Tests') {
+      steps {
+        git credentialsId: 'github-viniciusflores', url: 'https://github.com/viniciusflores/tasks-api-test.git'
+        sh 'mvn test'
+      }
+    }
   }
 }
