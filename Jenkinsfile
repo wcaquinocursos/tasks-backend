@@ -52,4 +52,12 @@ pipeline {
       }
     }
   }
+  stage('Funcional Tests') {
+      steps {
+        dir('funcional test') {
+          git credentialsId: 'github-viniciusflores', url: 'https://github.com/viniciusflores/tasks-functional-test.git'
+          sh 'mvn test'
+        }
+      }
+    }
 }
