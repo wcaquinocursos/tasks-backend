@@ -29,18 +29,27 @@ pipeline {
         }
       }
     }
-    stage('Deploy') {
+    stage('Deploy Backend') {
       steps {
         deploy adapters: [tomcat8(credentialsId: 'TomcatLogin', path: '', url: 'http://localhost:8001/')], contextPath: 'tasks-backend', war: 'target/tasks-backend.war'
       }
     }
     stage('API Tests') {
       steps {
-        dir('api test') {}
-        git credentialsId: 'github-viniciusflores', url: 'https://github.com/viniciusflores/tasks-api-test.git'
-        sh 'mvn test'
+        dir('api test') {
+          git credentialsId: 'github-viniciusflores', url: 'https://github.com/viniciusflores/tasks-api-test.git'
+          sh 'mvn test'
+        }
+      }
+    }
+    stage('Deploy Front-end'){
+      steps {
+        dir('frontend') {
+          git credentialsId: 'github-viniciusflores', url: 'https://github.com/viniciusflores/tasks-frontend.git'
+          sh 'mvn clean package -DskipTests=true'
+          deploy adapters: [tomcat8(credentialsId: 'TomcatLogin', path: '', url: 'http://localhost:8001/')], contextPath: 'tasks', war: 'target/tasks.war'
+        }
       }
     }
   }
-}
 }
