@@ -65,5 +65,14 @@ pipeline {
         sh 'docker-compose up -d'
       }
     }
+    stage('HealthCheck') {
+      steps {
+        sleep(5)
+        dir('funcional test') {
+          git credentialsId: 'github-viniciusflores', url: 'https://github.com/viniciusflores/tasks-functional-test.git'
+          sh 'mvn verify -Dskip.surefire.tests'
+        }
+      }
+    }
   }
 }
