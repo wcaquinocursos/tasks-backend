@@ -16,11 +16,17 @@ pipeline {
         scannerHome = tool 'SONAR_SCANNER'
       }
       steps {
-        withSonarQubeEnv('SONAR'){
+        withSonarQubeEnv('SONAR') {
           sh "${scannerHome}/bin/sonar-scanner -e -Dsonar.projectKey=DeployBack -Dsonar.host.url=http://localhost:9000 -Dsonar.login=31442faad94436bfc03792568484e5c9e89feeff -Dsonar.java.binaries=target"
+        }
+      }
+    }
+    stage('Quality Gate') {
+      steps {
+        timeout(time: 1, unit: 'MINUTES') {
+          waitForQualityGate abortPipeline: true
         }
       }
     }
   }
 }
-
