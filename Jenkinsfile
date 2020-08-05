@@ -42,7 +42,7 @@ pipeline {
         }
       }
     }
-    stage('Deploy Front-end'){
+    stage('Deploy Front-end') {
       steps {
         dir('frontend') {
           git credentialsId: 'github-viniciusflores', url: 'https://github.com/viniciusflores/tasks-frontend.git'
@@ -51,8 +51,7 @@ pipeline {
         }
       }
     }
-  }
-  stage('Funcional Tests') {
+    stage('Funcional Tests') {
       steps {
         dir('funcional test') {
           git credentialsId: 'github-viniciusflores', url: 'https://github.com/viniciusflores/tasks-functional-test.git'
@@ -60,4 +59,5 @@ pipeline {
         }
       }
     }
+  }
 }
