@@ -21,13 +21,15 @@ pipeline {
                 }
             }
         }
-        stage ('Quality Gate'){
-            steps{
-            sleep(12)
-            timeout(time: 1, unit: 'MINUTES')
-                waitForQualityGate abortPipeline: true
+        stage ('Quality Gate') {
+            steps {
+                sleep(11)
+                timeout(time: 1, unit: 'MINUTES'){
+                    waitForQualityGate(abortPipeline: true)
+                }
             }
-        }       
+        }
+
     }
 }
 
