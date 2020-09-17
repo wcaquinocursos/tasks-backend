@@ -45,6 +45,16 @@ pipeline {
                 }
             }
         }
+        stage ('Deply Frontend') {
+            steps {
+                dir('frontend') {
+                    git credentialsId: 'github_login', url: 'https://github.com/gugafer/tasks-frontend'
+                    bat 'mvn clean package' 
+                    deploy adapters: [tomcat8(credentialsId: 'TomcatLogin2', path: '', url: 'http://127.0.0.1:8001/')], contextPath: 'tasks', war: 'target\\tasks.war'
+       
+                }
+            }
+        }
     }
 }
 
