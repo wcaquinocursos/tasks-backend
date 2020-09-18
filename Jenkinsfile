@@ -68,7 +68,15 @@ pipeline {
                 bat 'docker-compose build'
                 bat 'docker-compose up -d'
             }
-        }       
+        }
+        stage ('Health check') {
+            steps {
+                sleep(5)
+                dir('functional-test') {
+                    bat 'mvn verify'
+                }
+            }
+        }      
     }
 }
 
