@@ -71,12 +71,17 @@ pipeline {
         }
         stage ('Health check') {
             steps {
-                sleep(12)
+                sleep(20)
                 dir('functional-test') {
                     bat 'mvn verify'
                 }
             }
         }      
+    }
+    post{
+        always{
+            junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml, functional-test/target/surefire-reports/*.xml, functional-test/target/failsafe-reports/*.xml'
+        }
     }
 }
 
