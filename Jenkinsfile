@@ -46,9 +46,9 @@ pipeline {
         stage('Deploy Frontend') {
             steps {
                 dir('frontend') {
-                    sh 'mvn clean package'
                     git credentialsId: 'github_login', url: 'https://github.com/limberger/tasks-frontend'                                
                     deploy adapters: [tomcat8(credentialsId: 'TomcatLogin', path: '', url: 'http://localhost:8001/')], contextPath: 'tasks', war: 'target/tasks.war'
+                    sh 'mvn clean package'
                 }
             }
         }
