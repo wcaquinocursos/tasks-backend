@@ -68,6 +68,15 @@ pipeline {
                 sh 'docker-compose up -d'
             }
         }
+        stage('Smoke Test') {
+            steps {
+                sleep(10)
+                dir('functional-test') {
+                    sh 'mvn verify -Dskip.surefire.test'
+                }
+
+            }
+        }
 
     }
 }
