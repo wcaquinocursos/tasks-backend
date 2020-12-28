@@ -27,13 +27,14 @@ public class TaskController {
 	public List<Task> findAll() {
 		return todoRepo.findAll();
 	}
-	
+
+	// Enviar um task - Se estiver fazia, sem data e for passado será lançada exceção
 	@PostMapping
 	public ResponseEntity<Task> save(@RequestBody Task todo) throws ValidationException {
 		if(todo.getTask() == null || todo.getTask() == "") {
 			throw new ValidationException("Fill the task description");
 		}
-		if(todo.getDueDate() == null) {
+		if(todo.getDueDate() == null)  {
 			throw new ValidationException("Fill the due date");
 		}
 		if(!DateUtils.isEqualOrFutureDate(todo.getDueDate())) {
