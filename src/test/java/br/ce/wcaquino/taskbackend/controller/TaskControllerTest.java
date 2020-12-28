@@ -59,9 +59,9 @@ public class TaskControllerTest {
         todo.setDueDate(LocalDate.of(2010, 01 ,01));
         try {
             controller.save(todo);
-            Assert.fail("xNão deveria chegar aqui!!!");
+            Assert.fail("Não deveria chegar aqui!!!");
         } catch (ValidationException e){
-            Assert.assertEquals("Due date must not be in past", e.getMessage());
+            Assert.assertEquals("xDue date must not be in past", e.getMessage());
         }
     }
 
