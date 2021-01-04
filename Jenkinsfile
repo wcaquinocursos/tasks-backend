@@ -1,16 +1,19 @@
 pipeline{
  agent any
     stages{
+
         stage('Build Backend'){
             steps{
                bat 'mvn clean package -DskipTests=true'
             }
         }
+
         stage('Unit Tests'){
             steps{
                bat 'mvn test'
             }
         }   
+
         stage('Sonar Analysis'){
             environment{
                 scannerHome = tool 'SONAR_SCANNER'
@@ -21,6 +24,7 @@ pipeline{
                }
             }
         }
+
         stage ('Quality Gate'){
             steps {
                 sleep(8) 
@@ -30,6 +34,7 @@ pipeline{
                 
             }
         }
+        
         stage('Deploy Backend'){
             steps{
                 deploy adapters: [tomcat8(credentialsId: 'TomcatLogin', path: '', url: 'http://localhost:8001/')], contextPath: 'tasks-backend', war: 'target/tasks-backend.war'
@@ -38,12 +43,24 @@ pipeline{
         
         stage('API Test'){
             steps{
-                dir('tasks-api'){
+                dir('api-test'){
                 git credentialsId: 'github_login', url: 'https://github.com/JosinaldoGJunior/tasks-api'
                 bat 'mvn test'
                 }
             }    
         }
 
+        stage('Deploy Fronend'){
+            steps{
+                dir('frontend'){
+                git credentialsId: 'github_login', url: 'https://github.com/JosinaldoGJunior/tasks-frontend'
+                bat 'mvn clean package'
+                deploy adapters: [tomcat8(credentialsId: 'TomcatLogin', path: '', url: 'http://localhost:8001/')], contextPath: 'tasks', war: 'target/tasks.war'
+                }
+            }    
+        }
+
     }  
 } 
+
+
