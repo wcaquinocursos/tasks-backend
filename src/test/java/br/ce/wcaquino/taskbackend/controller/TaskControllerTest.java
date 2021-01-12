@@ -37,7 +37,7 @@ public class TaskControllerTest {
 			taskController.save(toDo);
 			Assert.fail("Não deveria chegar neste ponto!");
 		} catch (ValidationException e) {
-			assertEquals("Fill the task descriptionnnn", e.getMessage());
+			assertEquals("Fill the task description", e.getMessage());
 		}
 
 	}
