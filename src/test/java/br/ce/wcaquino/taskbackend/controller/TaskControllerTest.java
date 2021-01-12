@@ -35,9 +35,9 @@ public class TaskControllerTest {
 		toDo.setDueDate(LocalDate.now());
 		try {
 			taskController.save(toDo);
-			Assert.fail("Não deveria chegar neste pontoo!");
+			Assert.fail("Não deveria chegar neste ponto!");
 		} catch (ValidationException e) {
-			assertEquals("Fill the task description", e.getMessage());
+			assertEquals("Fill the task descriptionnnn", e.getMessage());
 		}
 
 	}
