@@ -51,5 +51,13 @@ pipeline {
                 }
             }
         }
+        stage ('Functional Test') {
+            steps {
+                dir('functional-test') {
+                    git credentialsId: 'tomcat_login', url: 'https://github.com/eduardocintra/tasks-funcional-tests'
+                    bat 'mvn clean test'
+                }
+            }
+        }
     }
 }
