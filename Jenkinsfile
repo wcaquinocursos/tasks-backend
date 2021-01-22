@@ -36,8 +36,10 @@ pipeline {
         }
         stage ('API Test') {
             steps {
-                git credentialsId: 'tomcat_login', url: 'https://github.com/eduardocintra/tasks-api-test'
-                bat 'mvn clean test'
+                dir('api-test') {
+                    git credentialsId: 'tomcat_login', url: 'https://github.com/eduardocintra/tasks-api-test'
+                    bat 'mvn clean test'
+                }
             }
         }
     }
