@@ -8,7 +8,7 @@ pipeline {
         }
         stage ('Unit Tests') {
             steps {
-                bat 'mvn clean test'
+                bat 'mvn test'
             }
         }
         stage ('Sonar Analysis') {
