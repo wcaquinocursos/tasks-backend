@@ -6,13 +6,12 @@ pipeline {
                 bat 'mvn clean package -DskipTest=true'
             }
         }
-        /*stage ('Meio'){
+        stage ('Unit Test'){
             steps {
-                bat 'echo meio'
-                bat 'echo meio parte 2'
+                bat 'mvn test'
             }
         }
-        stage ('Fim'){
+        /*stage ('Fim'){
             steps {
                 sleep (5)
                 bat 'echo Fim'
