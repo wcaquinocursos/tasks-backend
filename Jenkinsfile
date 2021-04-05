@@ -11,7 +11,7 @@ pipeline {
                 bat 'mvn test'
             }
         }
-        tage ('Sonar Analysis'){
+        stage ('Sonar Analysis'){
             environment{
                 scannerHome = tool 'SONAR_SCANNER'    
             }
