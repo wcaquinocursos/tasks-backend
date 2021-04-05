@@ -11,11 +11,18 @@ pipeline {
                 bat 'mvn test'
             }
         }
-        /*stage ('Fim'){
-            steps {
-                sleep (5)
-                bat 'echo Fim'
+        tage ('Sonar Analysis'){
+            enviroment{
+                scannerHome = tool 'SONAR_SCANNER'    
             }
-        }*/
+            steps {
+                withSonarQubeEnv('SONAR_LOCAL'){
+                    bat "${scannerHome}/bin/sonar-scanner -e -Dsonar.projectKey=DeployBack -Dsonar.host.url=http://localhost:9000 -Dsonar.login=0f445d2a90d58958a91fdbe10852696ba2ba2a0b -Dsonar.java.binaries=target -Dsonar.coverage.exclusions=**/.mvn/**,**/src/test/**,**/model/**,**Application.java**"
+                }
+            }
+        }
     }
 }
+
+
+ 
