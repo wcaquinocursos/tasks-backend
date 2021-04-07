@@ -67,5 +67,13 @@ pipeline {
                 }
             }
         }
+        stage ('HealthCheck'){
+            steps {
+                sleep(270)
+                dir('funcional-test') {
+                   bat 'mvn verify -Dskip.surefire.tests'
+                }
+            }
+        }
     }
 }
