@@ -33,5 +33,13 @@ pipeline {
 				}	
             }
 		}
+		stage ('Functional Tests') {
+            steps {
+				dir('functional-tests'){
+					git credentialsId: 'GitHubLogin', url: 'https://github.com/elyfranmedeiros/tasks-functional-tests'
+					bat 'mvn test'
+				}
+            }
+		}
     }
 }
