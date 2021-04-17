@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage ('Elyfran') {
+        stage ('Inicio') {
             steps {
                 bat 'echo inicio'
             }
