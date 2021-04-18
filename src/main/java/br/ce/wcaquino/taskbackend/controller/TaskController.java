@@ -50,6 +50,5 @@ public class TaskController {
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable Long id) {
 		todoRepo.deleteById(id);
-		System.out.println(id);
 	}
 }
