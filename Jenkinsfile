@@ -23,9 +23,10 @@ pipeline {
         }
         stage('Quality Gate'){
             steps {
-                timeout(time: 1, unit:'MINUTES')
-                waitForQualityGate abortPipeline: true
-                sh 'mvn test'
+                sleep(10)
+                timeout(time: 1, unit:'MINUTES'){
+                    waitForQualityGate abortPipeline: true
+                }                
             }
         }
     }
