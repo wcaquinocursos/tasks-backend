@@ -75,11 +75,11 @@ pipeline {
               		sh "mvn verify -Dskip.surefire.tests"
               	}
             }
-        }
-        post{
-        	always{
-                junit allowEmptyResults: true, testResults: "target/sunfire-reports/*.xml, api-test/target/sunfire-reports/*.xml, functional-test/target/sunfire-reports/*.xml"
-        	}
-        } 
+        }        
     }
+    post{
+       	always{
+            junit allowEmptyResults: true, testResults: 'target/sunfire-reports/*.xml, api-test/target/sunfire-reports/*.xml, functional-test/target/sunfire-reports/*.xml' 
+           } 
+    } 
 }
