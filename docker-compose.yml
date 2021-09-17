@@ -3,6 +3,7 @@ services:
   db:
     container_name: pg-prod
     image: postgres:9.6
+    user: root
     networks:
       - prod_net_back
     environment:
@@ -15,6 +16,7 @@ services:
   backend:
     container_name: backend-prod
     image: back_prod:build_${BUILD_NUMBER}
+    user: root
     build:
       context: .
       args:
@@ -37,6 +39,7 @@ services:
   frontend:
     container_name: frontend-prod
     image: front_prod:build_${BUILD_NUMBER}
+    user: root
     build:
         context: .
         args:
