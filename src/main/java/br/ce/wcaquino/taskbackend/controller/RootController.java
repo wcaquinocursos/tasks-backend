@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class RootController {
 
 	
+	public static final String HELLO_WORLD = "Hello World!";
+
 	@GetMapping
 	public String hello() {
-		return "Hello World!";
+		return HELLO_WORLD;
 	}
 }
