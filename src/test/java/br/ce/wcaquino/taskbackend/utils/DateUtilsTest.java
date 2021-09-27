@@ -15,7 +15,7 @@ public class DateUtilsTest {
 		
 		Boolean isFuture = DateUtils.isEqualOrFutureDate(localDate);
 		
-		assertFalse(isFuture);
+		assertTrue(isFuture);
 	}
 	
 	@Test
