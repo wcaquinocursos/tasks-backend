@@ -36,7 +36,7 @@ pipeline {
         }
         stage ('API Tests') {
             steps {
-                dir('api test') {
+                dir('api-test') {
                     git credentialsId: 'gitHub_login', url: 'https://github.com/carlos-george/tasks-api-tests'
                     sh 'mvn test'
                 }
@@ -49,6 +49,14 @@ pipeline {
                     git credentialsId: 'gitHub_login', url: 'https://github.com/carlos-george/tasks-frontend'
                     sh 'mvn clean package -DskipTests=true'
                     deploy adapters: [tomcat8(credentialsId: 'login_tomcat', path: '', url: 'http://localhost:8001')], contextPath: 'tasks', war: 'target/tasks.war'
+                }
+            }
+        }
+        stage ('Functional Tests') {
+            steps {
+                dir('func-test') {
+                    git credentialsId: 'gitHub_login', url: 'https://github.com/carlos-george/tasks-functional-tests'
+                    sh 'mvn test'
                 }
             }
         }
