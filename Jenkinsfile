@@ -42,8 +42,17 @@ pipeline {
                 }
             }
         }
+        stage ('Deploy BackEnd') {
+            steps {
+                dir('tasks-frontend') {
+
+                    git credentialsId: 'gitHub_login', url: 'https://github.com/carlos-george/tasks-frontend'
+                    sh 'mvn clean package -DskipTests=true'
+                    deploy adapters: [tomcat8(credentialsId: 'login_tomcat', path: '', url: 'http://localhost:8001')], contextPath: 'tasks', war: 'target/tasks.war'
+                }
+            }
+        }
     }
 }
-
 
 
