@@ -42,7 +42,7 @@ pipeline {
                 }
             }
         }
-        stage ('Deploy BackEnd') {
+        stage ('Deploy Frontend') {
             steps {
                 dir('tasks-frontend') {
 
