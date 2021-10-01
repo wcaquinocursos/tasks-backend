@@ -56,17 +56,26 @@ pipeline {
         }
         stage ('Functional Tests') {
             steps {
-                // dir('func-test') {
-                //     git credentialsId: 'gitHub_login', url: 'https://github.com/carlos-george/tasks-functional-tests'
-                //     sh 'mvn test'
-                // }
-                sh 'echo Functional tests'
+                dir('func-test') {
+                    git credentialsId: 'gitHub_login', url: 'https://github.com/carlos-george/tasks-functional-tests'
+                    sh 'mvn test'
+                }
+                // sh 'echo Functional tests'
             }
         }
         stage ('Deploy Prod') {
             steps {
                 sh 'docker-compose build'
                 sh 'docker-compose up -d'
+            }
+        }
+        stage ('Health Check') {
+            steps {
+                speep(15)
+                dir('func-test') {
+                    sh 'mvn verify -Dskip.surefire.tests'
+                }
+                // sh 'echo Health Check'
             }
         }
     }
