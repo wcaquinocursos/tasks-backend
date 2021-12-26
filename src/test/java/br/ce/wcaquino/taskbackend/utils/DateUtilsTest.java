@@ -12,7 +12,7 @@ public class DateUtilsTest {
 
 		LocalDate date = LocalDate.of(2023, 01, 01);
 
-		Assert.assertFalse("A data futura falhou!", DateUtils.isEqualOrFutureDate(date));
+		Assert.assertTrue("A data futura falhou!", DateUtils.isEqualOrFutureDate(date));
 
 	}
 
