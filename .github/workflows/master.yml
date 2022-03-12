@@ -31,13 +31,13 @@ jobs:
       id: changelog
       uses: metcalfc/changelog-generator@v2.0.0
       with:
-        myToken: ${{ secrets.GITHUB_TOKEN }}
+        myToken: ${{ secrets.GH_TOKEN }}
 
     - name: Create GitHub Release
       id: create_release
       uses: actions/create-release@v1
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       with:
         tag_name: ${{ github.event.inputs.releaseversion }}
         release_name: ${{ github.event.inputs.releaseversion }}
