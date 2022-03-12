@@ -4,6 +4,13 @@
 name: Java CI with Maven
 
 on:
+  workflow_dispatch:
+    inputs:
+      releaseCanditateVersion:
+        description: 'Name of version (ie 5.5.0)'
+        required: true
+        
+        
   push:
     branches: [ master ]
   pull_request:
