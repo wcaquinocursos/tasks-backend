@@ -6,30 +6,40 @@ name: Java CI with Maven
 on:
   workflow_dispatch:
     inputs:
-      releaseCanditateVersion:
-        description: 'Name of version (ie 5.5.0)'
+      releaseversion:
+        description: 'Release version'
         required: true
-        
-        
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
-
 jobs:
-
-  
   build:
-
     runs-on: ubuntu-latest
-
     steps:
+    - run: echo "Release version ${{ github.event.inputs.releaseversion }}!"
     - uses: actions/checkout@v2
     - name: Set up JDK 11
       uses: actions/setup-java@v2
       with:
         java-version: '11'
         distribution: 'temurin'
-        cache: maven
+    
+    - name: Set projects Maven version to GitHub Action GUI set version
+      run: mvn versions:set "-DnewVersion=${{ github.event.inputs.releaseversion }}" --no-transfer-progress
+      
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+    
+    - name: Generate changelog
+      id: changelog
+      uses: metcalfc/changelog-generator@v2.0.0
+      with:
+        myToken: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Create GitHub Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.event.inputs.releaseversion }}
+        release_name: ${{ github.event.inputs.releaseversion }}
+        draft: false
+        prerelease: false
