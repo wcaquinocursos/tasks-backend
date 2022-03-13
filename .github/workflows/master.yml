@@ -8,9 +8,10 @@ on:
     inputs:
       releaseversion:
         description: 'Release version'
+        default: '2.4.0'
         required: true
 jobs:
-  build:
+  publish:
     runs-on: ubuntu-latest
     steps:
     - run: echo "Release version ${{ github.event.inputs.releaseversion }}!"
