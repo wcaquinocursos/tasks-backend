@@ -1,6 +1,8 @@
 name: Build Java CI com with Maven
 
-on: [pull_request]
+on:
+  pull_request:
+    branches: [ master ]
 
 jobs:
 
