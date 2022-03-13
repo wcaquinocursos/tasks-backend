@@ -1,0 +1,1 @@
+# APP to test JAVA and CI GITHUB_ACTIONS
