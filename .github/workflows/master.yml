@@ -1,8 +1,4 @@
-# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
-# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
-
-name: Release version java 11 com maven
-
+name: release-to-maven-central
 on:
   workflow_dispatch:
     inputs:
@@ -29,6 +25,19 @@ jobs:
         with:
           tag_name: ${{ github.event.inputs.releaseversion }}
           release_name: ${{ github.event.inputs.releaseversion }}
-          body: 
+          body: |
+
+            ```
+            <dependencies>
+            	<dependency>
+            	    <groupId>org.springframework.boot</groupId>
+            	    <artifactId>tasks-backend</artifactId>
+            	    <version>${{ github.event.inputs.releaseversion }}</version>
+            	</dependency>
+            </dependencies>
+            ```
+
+            ### Things that changed in this release
+            ${{ steps.changelog.outputs.changelog }}
           draft: false
           prerelease: false
