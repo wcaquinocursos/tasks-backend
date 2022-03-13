@@ -1,15 +1,17 @@
-name: Release Java com Maven
+---
+name: Release Flow
+
 on:
   workflow_dispatch:
     inputs:
       releaseversion:
-        description: 'Release version'
+        description: 'Release version (ie 5.5.0)'
         required: true
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Will start a Maven Central upload with version ${{ github.event.inputs.releaseversion }}"
+      - run: echo "Will start a Maven upload with version ${{ github.event.inputs.releaseversion }}"
 
       - uses: actions/checkout@v2
 
