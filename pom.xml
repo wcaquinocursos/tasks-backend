@@ -37,11 +37,6 @@
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
 		</dependency>
-            	<dependency>
-            	    	<groupId>org.springframework.boot</groupId>
-            	    	<artifactId>tasks-backend</artifactId>
-            	    	<version>${{ github.event.inputs.releaseversion }}</version>
-            	</dependency> 
 
 		<dependency>
 			<groupId>org.postgresql</groupId>
