@@ -1,6 +1,8 @@
 name: Build Java CI com with Maven
 
 on:
+  push:
+    branches: [ main ]
   pull_request:
     branches: [ main ]
 
