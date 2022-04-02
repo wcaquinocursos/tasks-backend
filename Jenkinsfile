@@ -3,7 +3,7 @@ pipeline {
 	stages {
 		stage ('Build Backend') {
 			steps {
-				sh 'echo deu certo!'
+				sh 'mvn clean package'
 			}
 		}
 	}
