@@ -51,5 +51,13 @@ pipeline {
                 }   
             }
         }
+        stage ('Funcional Test') {
+            steps {
+                dir ('funcional-test') {
+                    git credentialsId: 'github_login_correct', url: 'https://github.com/orlando-dev/tasks-funcional-tests'
+                    bat 'mvn test'
+                }
+            }
+        }
     }
 }
