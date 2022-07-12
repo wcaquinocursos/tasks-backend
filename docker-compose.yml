@@ -1,0 +1,62 @@
+version: "3"
+services:
+  db:
+    container_name: pg-prod
+    image: postgres:9.6
+    networks:
+      - prod_net_back
+    environment:
+      - POSTGRES_PASSWORD=passwd
+      - POSTGRES_DB=tasks
+    volumes:
+      - prod_postgresql:/var/lib/postgresql
+      - prod_postgresql_data:/var/lib/postgresql/data
+
+  backend:
+    container_name: backend-prod
+    image: back_prod:build_${BUILD_NUMBER}
+    build:
+      context: .
+      args:
+        - WAR_FILE=target/tasks-backend.war
+        - CONTEXT=tasks-backend
+    networks:
+      - prod_net_back
+      - prod_net_front
+    #ports:
+    #  - 9998:8080
+    environment:
+      - DATABASE_HOST=db
+      - DATABASE_PORT=5432
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWD=passwd
+      #- DATABASE_UPDATE=none
+    depends_on:
+      - db
+
+  frontend:
+    container_name: frontend-prod
+    image: front_prod:build_${BUILD_NUMBER}
+    build:
+        context: .
+        args:
+          - WAR_FILE=frontend/target/tasks.war
+          - CONTEXT=tasks
+    networks:
+      - prod_net_front
+    ports:
+      - 9999:8080
+    environment:
+      - BACKEND_HOST=backend
+      - BACKEND_PORT=8080
+      - APP_VERSION=build_${BUILD_NUMBER}
+    #depends_on:
+    #  - backend
+
+networks:
+  prod_net_front:
+  prod_net_back:
+
+volumes:
+  prod_postgresql:
+  prod_postgresql_data:
