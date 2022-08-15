@@ -2,6 +2,7 @@ package br.ce.wcaquino.taskbackend.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,11 +20,8 @@ import br.ce.wcaquino.taskbackend.utils.ValidationException;
 @RequestMapping(value = "/todo")
 public class TaskController {
 
-	private final TaskRepo todoRepo;
-
-	public TaskController(TaskRepo todoRepo) {
-		this.todoRepo = todoRepo;
-	}
+	@Autowired
+	private TaskRepo todoRepo;
 
 	@GetMapping
 	public List<Task> findAll() {
