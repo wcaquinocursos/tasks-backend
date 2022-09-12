@@ -20,6 +20,15 @@ pipeline {
             }
 
         }
+
+         stage('API Tests'){
+            steps{
+                git credentialsId: 'git', url: 'git@github.com:fraanpsilva/api-test-RestaAssured.git'
+                bash 'mvn test'
+                
+            }
+
+        }
     }
 
 }
