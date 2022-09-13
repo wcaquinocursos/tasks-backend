@@ -39,6 +39,17 @@ pipeline {
       }
 
     }
-    
+
+    stage('Functional Tests'){
+      steps{
+        dir('functional-test'){
+          git credentialsId: 'git', url: 'git@github.com:fraanpsilva/tasks-functional-testes.git'
+          sh 'mvn test'
+
+        }
+      }
+
+    }
+
   }
 }
