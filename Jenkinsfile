@@ -25,7 +25,7 @@ pipeline {
             steps {
                 //sleep(300)
                 //timeout(time: 4, unit: 'MINUTES') {
-                    waitForQualityGate abortPipeline: true // vai esperar uma msg do webhook do sonar. se demorar muito ele vai da timeout
+                    //waitForQualityGate abortPipeline: true // vai esperar uma msg do webhook do sonar. se demorar muito ele vai da timeout
                 //}
             }
         }
