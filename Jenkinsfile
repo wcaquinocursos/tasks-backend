@@ -17,17 +17,17 @@ pipeline {
             }
             steps {
                 withSonarQubeEnv('SONAR_LOCAL') { // variável de ambiente do jenkins
-                    bat "${scannerHome}/bin/sonar-scanner -e -Dsonar.projectKey=DeployBack -Dsonar.host.url=http://localhost:9000 -Dsonar.login=cacf3d1f1d8b850884acbafab1166216c29f7ce5 -Dsonar.java.binaries=target -Dsonar.coverage.exclusions=**/.mvn/**,**/src/test/**,**/model/**,**Application.java"
+                    bat "${scannerHome}/bin/sonar-scanner -e -Dsonar.projectKey=DeployBack -Dsonar.host.url=http://localhost:9000 -Dsonar.login=8780e65fea802c71ac65199d24f286399d4cedae -Dsonar.java.binaries=target -Dsonar.coverage.exclusions=**/.mvn/**,**/src/test/**,**/model/**,**Application.java"
                 } // está dizendo todo o caminho do scannerhome onde jenkins instalou automático para mim.
             }
         }
         stage ('Quality Gate') {
             steps {
-                //sleep(1)
-                //timeout(time: 4, unit: 'MINUTES') {
-                  bat 'echo Quality Gate is OK'
-		    //waitForQualityGate abortPipeline: true // vai esperar uma msg do webhook do sonar. se demorar muito ele vai da timeout
-                //}
+                sleep(1)
+                timeout(time: 1, unit: 'MINUTES') {
+                //   bat 'echo Quality Gate is OK'
+		            waitForQualityGate abortPipeline: true // vai esperar uma msg do webhook do sonar. se demorar muito ele vai da timeout
+                }
             }
         }
         stage ('Deploy Backend') {
