@@ -24,10 +24,10 @@ pipeline {
         stage ('Quality Gate') {
             steps {
                 sleep(1)
-                timeout(time: 1, unit: 'MINUTES') {
-                //   bat 'echo Quality Gate is OK'
-		            waitForQualityGate abortPipeline: true // vai esperar uma msg do webhook do sonar. se demorar muito ele vai da timeout
-                }
+                // timeout(time: 1, unit: 'MINUTES') {
+                // //   bat 'echo Quality Gate is OK'
+		        //     waitForQualityGate abortPipeline: true // vai esperar uma msg do webhook do sonar. se demorar muito ele vai da timeout
+                // }
             }
         }
         stage ('Deploy Backend') {
