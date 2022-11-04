@@ -20,7 +20,7 @@
 		<java.version>1.8</java.version>
 		<sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
 		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
-		<sonar.coverage.jacoco.xmlReportPath>./target/site/jacoco</sonar.coverage.jacoco.xmlReportPath>
+		<sonar.coverage.jacoco.xmlReportPaths>./target/site/jacoco</sonar.coverage.jacoco.xmlReportPaths>
 	</properties>
 
 	<dependencies>
