@@ -24,10 +24,9 @@ pipeline {
             }
 
             steps {
-                sh "${env.SONAR_SCANNER}/bin/sonar-scanner"
-
-                withSonarQubeEnv('SONAR_LOCAL') {
-                    sh 'mvn ${env.SONAR_MAVEN_GOAL}'
+                withSonarQubeEnv(installationName: 'SONAR_LOCAL', credentialsId: 'sonarqube-token') {
+                    sh "${env.SONAR_SCANNER}/bin/sonar-scanner"
+                    sh "mvn ${env.SONAR_MAVEN_GOAL}"
                 }
             }
         }
