@@ -17,5 +17,11 @@ pipeline {
                 sh 'mvn test'
             }
         }
+
+        stage ('Run SonarQube Analysis') {
+            withSonarQubeEnv('SONAR_LOCAL') {
+                sh 'mvn ${env.SONAR_MAVEN_GOAL}'
+            }
+        }
     }
 }
