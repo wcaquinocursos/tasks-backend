@@ -1,3 +1,5 @@
+def scannerHome = tool 'SONAR_SCANNER'
+
 pipeline {
     agent any
 
@@ -19,13 +21,14 @@ pipeline {
         }
 
         stage ('Run SonarQube Analysis') {
+            environment {
+                scannerHome = tool name: 'SONAR_SCANNER', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+            }
+
             steps {
-                script {
-                    def scannerHome = tool 'SONAR_SCANNER'
-                }
+                sh "${env.SONAR_SCANNER}/bin/sonar-scanner"
 
                 withSonarQubeEnv('SONAR_LOCAL') {
-                    sh '${scannerHome}/bin/sonar-scanner'
                     sh 'mvn ${env.SONAR_MAVEN_GOAL}'
                 }
             }
