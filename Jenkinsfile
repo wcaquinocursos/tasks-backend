@@ -24,7 +24,7 @@ pipeline {
             }
 
             steps {
-                withSonarQubeEnv(installationName: 'SONAR_LOCAL', credentialsId: 'sonarqube-token') {
+                withSonarQubeEnv('SONAR_LOCAL') {
                     sh "mvn ${env.SONAR_MAVEN_GOAL} -Dsonar.login=${env.SONAR_AUTH_TOKEN}"
                 }
             }
