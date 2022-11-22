@@ -25,8 +25,8 @@ pipeline {
 
             steps {
                 withSonarQubeEnv(installationName: 'SONAR_LOCAL', credentialsId: 'sonarqube-token') {
-                    sh "${env.SONAR_SCANNER}/bin/sonar-scanner"
-                    sh "mvn ${env.SONAR_MAVEN_GOAL} -Dsonar.projectKey=br.ce.wcaquino:tasks-backend-pipeline"
+                    sh "${env.SONAR_SCANNER}/bin/sonar-scanner -Dsonar.projectKey=br.ce.wcaquino:tasks-backend-pipeline"
+                    sh "mvn ${env.SONAR_MAVEN_GOAL}"
                 }
             }
         }
