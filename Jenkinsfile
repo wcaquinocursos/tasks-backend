@@ -48,5 +48,15 @@ pipeline {
         }
       }
     }
+
+    stage('Deploy Frontend') {
+      steps {
+        dir('frontend') {
+          git 'https://github.com/marcelsby/tasks-frontend'
+          sh 'mvn clean package'
+          deploy adapters: [tomcat9(credentialsId: 'tasks-app-tomcat', path: '', url: 'http://tasks-app:8001/')], contextPath: 'tasks', war: 'target/tasks.war'
+        }
+      }
+    }
   }
 }
