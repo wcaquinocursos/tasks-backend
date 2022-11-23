@@ -43,7 +43,7 @@ pipeline {
     stage('API Test') {
       steps {
         git 'https://github.com/marcelsby/tasks-api-test'
-        sh 'mvn test'
+        sh 'mvn test -Dapi.baseuri=http://tasks-app:8001/tasks-backend'
       }
     }
   }
