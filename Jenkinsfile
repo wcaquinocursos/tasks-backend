@@ -19,16 +19,13 @@ pipeline {
         }
 
         stage ('Run SonarQube Analysis') {
-            environment {
-                SONAR_SCANNER = tool name: 'SONAR_SCANNER', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-            }
-
             steps {
                 withSonarQubeEnv('SONAR_LOCAL') {
                     sh "mvn ${env.SONAR_MAVEN_GOAL} -Dsonar.login=${env.SONAR_AUTH_TOKEN}"
                 }
             }
         }
+        
         stage('Wait for Quality Gate') {
             steps {
                 timeout(time: 2, unit: 'MINUTES') {
