@@ -58,5 +58,14 @@ pipeline {
         }
       }
     }
+
+    stage('Functional Test') {
+      steps {
+        dir('functional-test') {
+          git 'https://github.com/marcelsby/tasks-functional-test'
+          sh 'mvn test -Dapp.selenium.hub.url=http://selenium-hub:4444 -Dapp.baseurl=http://tasks-app:8001/tasks'
+        }
+      }
+    }
   }
 }
