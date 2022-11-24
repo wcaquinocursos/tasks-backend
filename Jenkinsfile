@@ -79,7 +79,7 @@ pipeline {
     }
 
     fixed {
-      emailext attachLog: true, body: 'See the attached log below.', subject: 'Build $BUILD_NUMBER is fine', to: 'marcel.sby.br@gmail.com'
+      emailext attachLog: true, body: 'See the attached log below.', subject: 'Build $BUILD_NUMBER is back to normal', to: 'marcel.sby.br@gmail.com'
     }
   }
 }
