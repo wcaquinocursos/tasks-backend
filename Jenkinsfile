@@ -22,7 +22,7 @@ pipeline {
 			steps {
 				sleep(5)
 				timeout(time: 1, unit: 'MINUTES') {
-					waitForQualityGate(webhookSecretId: 'JenkinsSecretId') abortPipeline: true
+					waitForQualityGate webhookSecretId: 'JenkinsSecretId' abortPipeline: true
 				}
 			}
 		}
