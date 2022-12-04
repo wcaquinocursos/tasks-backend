@@ -22,8 +22,10 @@ pipeline {
 		stage ('Sonarqube Quality Gate') {
 			steps {
 				sleep(10)
-				timeout(time: 1, unit: 'MINUTES') {
-					waitForQualityGate abortPipeline: true
+				withSonarQubeEnv('Sonnar_Local') {
+					timeout(time: 1, unit: 'MINUTES') {
+						waitForQualityGate abortPipeline: true
+					}
 				}
 			}
 		}
