@@ -49,6 +49,14 @@ pipeline {
 				}
 			}
 		}
+		stage ('Frontend Functional Test') {
+			steps {
+				dir('tasks-front-tests') {
+					git credentialsId: 'github_login', url: 'https://github.com/C-Viana/tasks-front-tests.git'
+					bat 'mvn clean test'
+				}
+			}
+		}
 
 	}
 }
