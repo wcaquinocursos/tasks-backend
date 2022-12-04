@@ -20,9 +20,9 @@ pipeline {
 		}
 		stage ('Sonarqube Quality Gate') {
 			steps {
-				def qualitygate = waitForQualityGate(webhookSecretId: 'JenkinsSecretId')
-				if (qualitygate.status != "OK") {
-					error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
+				sleep(5)
+				timeout(time: 1, unit: 'MINUTES') {
+					waitForQualityGate webhookSecretId: 'JenkinsSecretId'
 				}
 			}
 		}
