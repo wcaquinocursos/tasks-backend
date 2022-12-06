@@ -65,6 +65,7 @@ pipeline {
 		}
 		stage ('Health Check') {
 			steps {
+				sleep(6)
 				dir('tasks-front-tests')
 				bat 'mvn verify -Dskip.surefire.tests'
 			}
