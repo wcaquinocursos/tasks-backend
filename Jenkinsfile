@@ -15,15 +15,7 @@ pipeline {
 		stage ('Sonarqube Scanner Analysis') {
 			steps {
 				withSonarQubeEnv('Sonar_Local') {
-					bat "mvn package sonar:sonar -Dsonar.projectKey=deploy-backend -Dsonar.host.url=http://localhost:9000 -Dsonar.login=sqa_1718217ed5b2bd5645bc32714417c2ae70f21983 -Dsonar.java.binaries=target -Dsonar.coverage.exclusions=**/.mvn/**,**/src/test/**,**/model/**,**Application.java"
-				}
-			}
-		}
-		stage ('Sonarqube Quality Gate') {
-			steps {
-				sleep(10)
-				timeout(time: 5, unit: 'MINUTES') {
-					waitForQualityGate webhookSecretId: 'JenkinsSecretId', abortPipeline: true
+					bat "mvn package sonar:sonar -Dsonar.projectKey=deploy-backend -Dsonar.host.url=http://localhost:9000 -Dsonar.java.binaries=target -Dsonar.coverage.exclusions=**/.mvn/**,**/src/test/**,**/model/**,**Application.java -Dsonar.qualitygate.wait=true"
 				}
 			}
 		}
