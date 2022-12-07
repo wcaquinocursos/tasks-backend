@@ -21,8 +21,8 @@ pipeline {
 		}
 		stage ('Sonarqube Quality Gate') {
 			steps {
-				sleep(5)
-				timeout(time: 1, unit: 'MINUTES') {
+				sleep(10)
+				timeout(time: 5, unit: 'MINUTES') {
 					waitForQualityGate webhookSecretId: 'JenkinsSecretId', abortPipeline: true
 				}
 			}
