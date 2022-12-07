@@ -21,7 +21,7 @@ pipeline {
 		}
 		stage ('Sonarqube Quality Gate') {
 			steps {
-				sleep(5)
+				sleep(8)
 				timeout(time: 1, unit: 'MINUTES') {
 					waitForQualityGate abortPipeline: true
 				}
