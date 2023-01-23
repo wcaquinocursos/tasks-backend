@@ -34,7 +34,7 @@ pipeline {
                 sleep(5)
                 timeout(time: 1, unit: 'MINUTES') {
                 //   bat 'echo Quality Gate is OK'
-		            waitForQualityGate abortPipeline: true // vai esperar uma msg do webhook do sonar. se demorar muito ele vai da timeout
+		            waitForQualityGate(webhookSecretId: 'd5f345a8752107a6fedad8f109b0d01ea0be8793') abortPipeline: true // vai esperar uma msg do webhook do sonar. se demorar muito ele vai da timeout
                 }
             }
         }
