@@ -19,9 +19,9 @@ pipeline {
             }
             steps {
                 bat 'echo Realizando análise dos testes unitários'
-                withSonarQubeEnv('SONAR_LOCAL') { // variável de ambiente do jenkins
+                withSonarQubeEnv('SONAR_LOCAL') { // variável de ambiente do jenkins d5f345a8752107a6fedad8f109b0d01ea0be8793
                     //PC MASTER RACER
-                    bat "${scannerHome}/bin/sonar-scanner -e -Dsonar.projectKey=DeployBack -Dsonar.host.url=http://localhost:9000 -Dsonar.login=d5f345a8752107a6fedad8f109b0d01ea0be8793 -Dsonar.java.binaries=target -Dsonar.coverage.exclusions=**/.mvn/**,**/src/test/**,**/model/**,**Application.java"
+                    bat "${scannerHome}/bin/sonar-scanner -e -Dsonar.projectKey=DeployBack -Dsonar.host.url=http://localhost:9000 -Dsonar.login=d5f345a8752107a6fedad8f109b0d01ea0be8794 -Dsonar.java.binaries=target -Dsonar.coverage.exclusions=**/.mvn/**,**/src/test/**,**/model/**,**Application.java"
                     
                     //Note
                     // bat "${scannerHome}/bin/sonar-scanner -e -Dsonar.projectKey=DeployBack -Dsonar.host.url=http://localhost:9000 -Dsonar.login=cacf3d1f1d8b850884acbafab1166216c29f7ce5 -Dsonar.java.binaries=target -Dsonar.coverage.exclusions=**/.mvn/**,**/src/test/**,**/model/**,**Application.java"
