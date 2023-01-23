@@ -19,9 +19,9 @@ pipeline {
             }
             steps {
                 bat 'echo Realizando análise dos testes unitários'
-                withSonarQubeEnv('SONAR_LOCAL') { // variável de ambiente do jenkins -Dsonar.login=d5f345a8752107a6fedad8f109b0d01ea0be8793
+                withSonarQubeEnv('SONAR_LOCAL') { // variável de ambiente do jenkins
                     //PC MASTER RACER
-                    bat "${scannerHome}/bin/sonar-scanner -e -Dsonar.projectKey=DeployBack -Dsonar.host.url=http://localhost:9000 -Dsonar.java.binaries=target -Dsonar.coverage.exclusions=**/.mvn/**,**/src/test/**,**/model/**,**Application.java"
+                    bat "${scannerHome}/bin/sonar-scanner -e -Dsonar.projectKey=DeployBack -Dsonar.host.url=http://localhost:9000 -Dsonar.login=d5f345a8752107a6fedad8f109b0d01ea0be8793 -Dsonar.java.binaries=target -Dsonar.coverage.exclusions=**/.mvn/**,**/src/test/**,**/model/**,**Application.java"
                     
                     //Note
                     // bat "${scannerHome}/bin/sonar-scanner -e -Dsonar.projectKey=DeployBack -Dsonar.host.url=http://localhost:9000 -Dsonar.login=cacf3d1f1d8b850884acbafab1166216c29f7ce5 -Dsonar.java.binaries=target -Dsonar.coverage.exclusions=**/.mvn/**,**/src/test/**,**/model/**,**Application.java"
@@ -31,12 +31,10 @@ pipeline {
         stage ('Quality Gate') {
             steps {
                 bat 'echo Validando a porcentam da cobertura do código no SonarQube'
-                withSonarQubeEnv('SONAR_LOCAL') {
                     sleep(1)
                     timeout(time: 1, unit: 'MINUTES') {
                     //   bat 'echo Quality Gate is OK'
-		                waitForQualityGate abortPipeline: true // vai esperar uma msg do webhook do sonar. se demorar muito ele vai da timeout
-                    }
+		                waitForQualityGate(credentialsId: 'd5f345a8752107a6fedad8f109b0d01ea0be8793') // vai esperar uma msg do webhook do sonar. se demorar muito ele vai da timeout
                 }
             }
         }
