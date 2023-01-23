@@ -31,8 +31,9 @@ pipeline {
         stage ('Quality Gate') {
             steps {
                 bat 'echo Validando a porcentam da cobertura do código no SonarQube'
-                sleep(100)
-                timeout(time: 5, unit: 'MINUTES') {
+                withSonarQubeEnv('SONAR_LOCAL') {}
+                sleep(1)
+                timeout(time: 1, unit: 'MINUTES') {
                 //   bat 'echo Quality Gate is OK'
 		            waitForQualityGate abortPipeline: true // vai esperar uma msg do webhook do sonar. se demorar muito ele vai da timeout
                 }
