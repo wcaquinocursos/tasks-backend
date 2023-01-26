@@ -25,7 +25,7 @@ pipeline {
                     
                     //Note
                      bat "${scannerHome}/bin/sonar-scanner -e -Dsonar.projectKey=DeployBack -Dsonar.host.url=http://localhost:9000 -Dsonar.login=cacf3d1f1d8b850884acbafab1166216c29f7ce5 -Dsonar.java.binaries=target -Dsonar.coverage.exclusions=**/.mvn/**,**/src/test/**,**/model/**,**Application.java"
-		     sleep(1)
+		     sleep(10)
                 } // está dizendo todo o caminho do scannerhome onde jenkins instalou automático para mim.
             }
         }
