@@ -84,7 +84,7 @@ pipeline {
         stage ('Health Check') {
             steps {
                 sleep(20)
-                bat 'echo Verificando se aplicação está no AR'
+                bat 'echo Verificando se aplicação está no Ar'
                 dir ('funcional-test') {
                     bat 'mvn verify -Dskip.surefire.tests'
                 }
