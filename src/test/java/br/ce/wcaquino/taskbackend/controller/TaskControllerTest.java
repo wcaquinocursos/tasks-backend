@@ -15,6 +15,7 @@ import br.ce.wcaquino.taskbackend.repo.TaskRepo;
 import br.ce.wcaquino.taskbackend.utils.ValidationException;
 
 public class TaskControllerTest {
+	static String failText = "Não deveria chegar nesse ponto!";
 	
 	@Mock
 	private TaskRepo taskRepo;
@@ -33,7 +34,7 @@ public class TaskControllerTest {
 		todo.setDueDate(LocalDate.now());
 		try {
 			controller.save(todo);
-			Assert.fail("Não deveria chegar nesse ponto!");
+			Assert.fail(failText);
 		} catch (ValidationException e) {
 			Assert.assertEquals("Fill the task description", e.getMessage());
 		}
@@ -45,7 +46,7 @@ public class TaskControllerTest {
 		todo.setTask("Descricao");
 		try {
 			controller.save(todo);
-			Assert.fail("Não deveria chegar nesse ponto!");
+			Assert.fail(failText);
 		} catch (ValidationException e) {
 			Assert.assertEquals("Fill the due date", e.getMessage());
 		}
@@ -59,7 +60,7 @@ public class TaskControllerTest {
 		todo.setDueDate(LocalDate.of(2010, 01, 01));
 		try {
 			controller.save(todo);
-			Assert.fail("Não deveria chegar nesse ponto!");
+			Assert.fail(failText);
 		} catch (ValidationException e) {
 			Assert.assertEquals("Due date must not be in past", e.getMessage());
 		}
