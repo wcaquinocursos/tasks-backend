@@ -39,20 +39,7 @@ pipeline {
                 }
             }
         }
-
-        parameters {
-            choice(
-                choices: ['Sim', 'Não'],
-                description: 'Deseja implantar no ambiente de homologação?',
-                name: 'IMPLANTAR_PROTOT'
-            )
-        }
-
         stage ('Deploy Backend') {
-            when {
-               expression { params.IMPLANTAR_PROTOT == 'Sim' }
-            }
-
             steps {
                 bat 'echo Realizando Deploy Backend'
                 deploy adapters: [tomcat8(credentialsId: 'tomcat_login', path: '', url: 'http://localhost:8001/')], contextPath: 'tasks-backend', war: 'target/tasks-backend.war'
@@ -86,18 +73,7 @@ pipeline {
                 }
             }
         }
-        parameters {
-            choice(
-                choices: ['Sim', 'Não'],
-                description: 'Deseja implantar no ambiente de produção?',
-                 name: 'IMPLANTAR_PRODUCAO'
-            )
-        }
-
         stage ('Deploy Prod') {
-             when {
-                expression { params.IMPLANTAR_PRODUCAO == 'Sim' }
-            }
             steps {
                 bat 'echo Criando build de produção'
                 bat 'docker-compose build'
