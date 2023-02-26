@@ -1,5 +1,13 @@
 pipeline {
 	agent any
+    parameters {
+        choice(
+            choices: ['Sim', 'Não'],
+            description: 'Deseja implantar no ambiente de produção?',
+            name: 'IMPLANTAR_PRODUCAO'
+        )
+    }
+
     stages {
         stage ('Build Backend') {
             steps {
@@ -73,7 +81,13 @@ pipeline {
                 }
             }
         }
+
+
+
         stage ('Deploy Prod') {
+            when {
+                expression { params.IMPLANTAR_PRODUCAO == 'Sim' }
+            }
             steps {
                 bat 'echo Criando build de produção'
                 bat 'docker-compose build'
@@ -83,6 +97,9 @@ pipeline {
             }
         }
         stage ('Health Check') {
+            when {
+                expression { params.IMPLANTAR_PRODUCAO == 'Sim' }
+            }
             steps {
                 sleep(20)
                 bat 'echo Verificando se aplicação está no Ar'
