@@ -14,7 +14,7 @@ services:
 
   backend:
     container_name: backend-prod
-    image: back_prod:v1.0.0
+    image: back_prod:build_${BUILD_NUMBER}
     build:
       context: .
       args:
@@ -36,7 +36,7 @@ services:
 
   frontend:
     container_name: frontend-prod
-    image: front_prod:v1.0.0
+    image: front_prod:build_${BUILD_NUMBER}
     build:
         context: .
         args:
@@ -49,7 +49,7 @@ services:
     environment:
       - BACKEND_HOST=backend
       - BACKEND_PORT=8080
-      - APP_VERSION=v1.0.0
+      - APP_VERSION=build_${BUILD_NUMBER}
     #depends_on:
     #  - backend
 
