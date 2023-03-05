@@ -2,10 +2,15 @@ pipeline {
 	agent any
     parameters {
         choice(
-            choices: ['Sim', 'Não'],
+            choices: ['Não', 'Sim'],
             description: 'Deseja implantar no ambiente de produção?',
             name: 'IMPLANTAR_PRODUCAO'
         )
+        choice(
+            choices: ['Não', 'Sim'],
+            description: 'Tem certeza que deseja implantar em produção?',
+            name: 'CONFIRMAR_IMPLANTACAO'
+    )
     }
 
     stages {
@@ -86,7 +91,7 @@ pipeline {
 
         stage ('Deploy Prod') {
             when {
-                expression { params.IMPLANTAR_PRODUCAO == 'Sim' }
+                expression { params.IMPLANTAR_PRODUCAO == 'Sim' && params.CONFIRMAR_IMPLANTACAO == 'Sim'}
             }
             steps {
                 bat 'echo Criando build de produção'
@@ -98,7 +103,7 @@ pipeline {
         }
         stage ('Health Check') {
             when {
-                expression { params.IMPLANTAR_PRODUCAO == 'Sim' }
+                expression { params.IMPLANTAR_PRODUCAO == 'Sim' && params.CONFIRMAR_IMPLANTACAO == 'Sim'}
             }
             steps {
                 sleep(20)
