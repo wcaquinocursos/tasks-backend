@@ -113,5 +113,11 @@ pipeline {
         always {
             junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml, api-test/target/surefire-reports/*.xml, funcional-test/target/surefire-reports/*.xml, funcional-test/target/failsafe-reports/*.xml'
         }
+        unsuccessful {
+            emailext attachLog: true, body: 'See the attached log below', subject: 'Version $APP_VERSION has failed', to: 'orlandox0796+jenkins@gmail.com'
+        }
+        fixed {
+            emailext attachLog: true, body: 'Ok', subject: 'Version $APP_VERSION is Ok', to: 'orlandox0796+jenkins@gmail.com'
+        }
     }
 }
