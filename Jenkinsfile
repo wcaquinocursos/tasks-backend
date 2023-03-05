@@ -120,10 +120,10 @@ pipeline {
             archiveArtifacts artifacts: 'target/tasks-backend.war, frontend/target/tasks.war', followSymlinks: false, onlyIfSuccessful: true
         }
         unsuccessful {
-            emailext attachLog: true, body: 'See the attached log below', subject: 'Version $APP_VERSION has failed', to: 'orlandox0796@gmail.com'
+            emailext attachLog: true, body: 'See the attached log below', subject: 'Version $APP_VERSION has failed', to: 'orlandox0796+jenkins@gmail.com'
         }
         fixed {
-            emailext attachLog: true, body: 'Ok', subject: 'Version $APP_VERSION is Ok', to: 'orlandox0796@gmail.com'
+            emailext attachLog: true, body: 'Ok', subject: 'Version $APP_VERSION is Ok', to: 'orlandox0796+jenkins@gmail.com'
         }
     }
 }
