@@ -4,10 +4,21 @@ pipeline {
         stage ('Build Backend') {
             steps {
                 bat 'mvn clean package -DskipTests=true'
+                }
             }
-            stage ('Unity Tests') {
-                steps {
-                    bat 'mvn test'
+            stage ('Unit Tests') {
+            steps {
+                bat 'mvn test'
+                }
+            }
+        stage ('Sonar Analysis') {
+            environment {
+                scannerHome = tool 'SONAR_SCANNER'
+            }
+            steps {
+                withSonarQubeEnv('SONAR_LOCAL') {
+                    bat "${scannerHome}/bin/sonar-scanner -e -Dsonar.projectKey=DeployBack -Dsonar.host.url=http://localhost:9000 -Dsonar.login=e938daff57935b4c4ba5cba670b07c7c2e8025d3 -Dsonar.java.binaries=target"
+                }
             }
         }
     }
