@@ -5,6 +5,10 @@ pipeline {
             steps {
                 bat 'mvn clean package -DskipTests=true'
             }
+            stage ('Unity Tests') {
+                steps {
+                    bat 'mvn test'
+            }
         }
     }
 }
