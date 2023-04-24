@@ -30,11 +30,13 @@ pipeline {
             steps {
                 sh 'echo Realizando Deploy Backend'
                 sshagent(['ssh-server-jenkins']) {
-                    sh "ssh -o StrictHostKeyChecking=true sapo@${INTRANET_DESENV} cd"
                     sh "pwd"
+                    sh "cd target/"
+                    sh "pwd"
+                    sh "ssh -o StrictHostKeyChecking=true sapo@${INTRANET_DESENV} cd /opt/tomcat/webapps/"
+                    sh "ssh sapo@${INTRANET_DESENV} pwd"
                     sh "ip a"
-                    sh "echo 'hello world' > myfile.txt"
-                    sh "mv myfile.txt sapo@${INTRANET_DESENV}:/opt/tomcat/webapps"
+                    sh "mv tasks-backend.war sapo@${INTRANET_DESENV}:/opt/tomcat/webapps"
                     sh "ip a"
                     sh "ssh ip a"
                     sh "ssh sapo@${INTRANET_DESENV} ip a"
