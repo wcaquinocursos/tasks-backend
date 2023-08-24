@@ -17,3 +17,9 @@ public class TaskBackendApplication extends SpringBootServletInitializer {
 		return application.sources(TaskBackendApplication.class);
 	}
 }
+
+module br.ce.wcaquino.taskbackend {
+
+	requires java.base;
+
+}
