@@ -17,26 +17,26 @@ import br.ce.wcaquino.taskbackend.utils.DateUtils;
 import br.ce.wcaquino.taskbackend.utils.ValidationException;
 
 @RestController
-@RequestMapping(value ="/todo")
+@RequestMapping(value = "/todo")
 public class TaskController {
 
 	@Autowired
 	private TaskRepo todoRepo;
-	
+
 	@GetMapping
 	public List<Task> findAll() {
 		return todoRepo.findAll();
 	}
-	
+
 	@PostMapping
 	public ResponseEntity<Task> save(@RequestBody Task todo) throws ValidationException {
-		if(todo.getTask() == null || todo.getTask() == "") {
+		if (todo.getTask() == null || todo.getTask() == "") {
 			throw new ValidationException("Fill the task description");
 		}
-		if(todo.getDueDate() == null) {
+		if (todo.getDueDate() == null) {
 			throw new ValidationException("Fill the due date");
 		}
-		if(!DateUtils.isEqualOrFutureDate(todo.getDueDate())) {
+		if (!DateUtils.isEqualOrFutureDate(todo.getDueDate())) {
 			throw new ValidationException("Due date must not be in past");
 		}
 		Task saved = todoRepo.save(todo);
