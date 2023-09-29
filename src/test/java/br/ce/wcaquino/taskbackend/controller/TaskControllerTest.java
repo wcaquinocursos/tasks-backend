@@ -75,7 +75,7 @@ public class TaskControllerTest {
 		todo.setDueDate(LocalDate.now());
 		controller.save(todo);
 		
-		Mockito.verify(taskRepo).save(null);
+		Mockito.verify(taskRepo).save(todo);
 		
 		
 		
