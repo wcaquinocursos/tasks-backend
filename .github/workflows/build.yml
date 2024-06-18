@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} is altor
 on:
   push:
     branches:
-      - main
+      - master
 jobs:
   CI-Steps:
     runs-on: ubuntu-latest
