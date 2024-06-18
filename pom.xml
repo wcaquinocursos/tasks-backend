@@ -13,7 +13,7 @@
 	<artifactId>tasks-backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>tasks-backend</name>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<description>A very simple task management tool</description>
 
 	<properties>
