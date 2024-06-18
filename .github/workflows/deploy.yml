@@ -1,11 +1,11 @@
-name: Java app build
-run-name: ${{ github.actor }} is altor
+name: Java app deploy
+run-name: ${{ github.actor }} is runnig deploy
 on:
   push:
     branches:
       - master
 jobs:
-  CI-Steps:
+  CD-Steps:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -22,5 +22,5 @@ jobs:
         env:
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          docker build --build-args="JARFILE=tasks-backend.jar" -t tasks-backend:$IMAGE_TAG
+          docker build --build-arg="JARFILE=tasks-backend.jar" -t tasks-backend:$IMAGE_TAG
           docker image save tasks-backend:$IMAGE_TAG
